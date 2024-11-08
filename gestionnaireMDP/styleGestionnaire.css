@@ -1,0 +1,108 @@
+#menu {
+    width: 100%;
+    background-color: #211d1d;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color 0.3s;
+}
+
+#menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#menu li {
+    margin: 0 15px;
+}
+
+#menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+#menu a:hover {
+    color: #e0e0e0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+}
+
+#app {
+    width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#saved-passwords ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#saved-passwords li {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode #app {
+    background-color: #444;
+    color: #fff;
+}
+
+.dark-mode button {
+    background-color: #66bb6a;
+}
+
+.dark-mode #darkModeToggle {
+    color: #fff;
+}

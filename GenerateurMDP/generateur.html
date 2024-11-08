@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Mots de Passe</title>
+    <link rel="stylesheet" href="styleGenerateur.css">
+</head>
+<body>
+
+<nav id="menu">
+    <ul>
+        <li><a href="../Accueil/home.html" class="menu-link">Accueil</a></li>
+        <li><a href="../calculatrice/calculatrice.html" class="menu-link">Calculatrice</a></li>
+        <li><a href="../gestionnaireMDP/gestionnaire.html" class="menu-link">Gestionnaire de mdp</a></li>
+        <li><a href="../GenerateurMDP/generateur.html" class="menu-link">Générateur de mdp</a></li>
+        <li><a href="#settings" class="menu-link" id="darkModeToggle" onclick="toggleDarkMode()">Mode Sombre</a></li>
+    </ul>
+</nav>
+
+<div id="app">
+    <h1>Générateur de Mots de Passe</h1>
+
+    <div id="password-generator">
+        <label for="length">Longueur du mot de passe :</label>
+        <input type="number" id="length" min="6" max="20" value="12">
+        <button onclick="generatePassword()">Générer</button>
+    </div>
+
+    <div id="generated-password">
+        <input type="text" id="password-display" readonly>
+    </div>
+</div>
+
+<script src="scriptGenerateur.js"></script>
+</body>
+</html>

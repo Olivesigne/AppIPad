@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice Avancée</title>
+    <link rel="stylesheet" href="styleCalculatrice.css">
+</head>
+<body>
+
+<nav id="menu">
+    <ul>
+        <li><a href="../Accueil/home.html" class="menu-link">Accueil</a></li>
+        <li><a href="../calculatrice/calculatrice.html" class="menu-link">Calculatrice</a></li>
+        <li><a href="../gestionnaireMDP/gestionnaire.html" class="menu-link">Gestionnaire de mdp</a></li>
+        <li><a href="../GenerateurMDP/generateur.html" class="menu-link">Générateur de mdp</a></li>
+        <li><a href="#settings" class="menu-link" id="darkModeToggle" onclick="toggleDarkMode()">Mode Sombre</a></li>
+    </ul>
+</nav>
+
+<div id="calculator">
+    <input type="text" id="display" readonly>
+
+    <div class="buttons">
+        <!-- Ligne 1 -->
+        <button class="button special" onclick="clearDisplay()">C</button>
+        <button class="button operation" onclick="calculateSquareRoot()">√</button>
+        <button class="button operation" onclick="appendOperator('**')">^</button>
+        <button class="button operation" onclick="appendOperator('/')">÷</button>
+
+        <!-- Ligne 2 -->
+        <button class="button number" onclick="appendNumber('7')">7</button>
+        <button class="button number" onclick="appendNumber('8')">8</button>
+        <button class="button number" onclick="appendNumber('9')">9</button>
+        <button class="button operation" onclick="appendOperator('*')">×</button>
+
+        <!-- Ligne 3 -->
+        <button class="button number" onclick="appendNumber('4')">4</button>
+        <button class="button number" onclick="appendNumber('5')">5</button>
+        <button class="button number" onclick="appendNumber('6')">6</button>
+        <button class="button operation" onclick="appendOperator('-')">-</button>
+
+        <!-- Ligne 4 -->
+        <button class="button number" onclick="appendNumber('1')">1</button>
+        <button class="button number" onclick="appendNumber('2')">2</button>
+        <button class="button number" onclick="appendNumber('3')">3</button>
+        <button class="button operation" onclick="appendOperator('+')">+</button>
+
+        <!-- Ligne 5 -->
+        <button class="button number" onclick="appendNumber('0')">0</button>
+        <button class="button number" onclick="appendOperator('.')">.</button>
+        <button class="button function" onclick="calculatePower()">xʸ</button>
+        <button class="button function" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script src="scriptCalculatrice.js"></script>
+
+</body>
+</html>
