@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1c3a5a8-72c5-4b8b-babc-9c71235c5889" name="Changes" comment="Fix #05: robots.txt et sitemap.xml V1.0">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accueil/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/accueil/home.html" afterDir="false" />
-    </list>
+    <list default="true" id="d1c3a5a8-72c5-4b8b-babc-9c71235c5889" name="Changes" comment="Fix #06: Icones" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,16 +41,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Leonel/Documents/CalculatriceIPad/ressources/img&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;discord-application&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Leonel/Documents/CalculatriceIPad/ressources/img",
+    "settings.editor.selected.configurable": "discord-project"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Leonel\Documents\CalculatriceIPad\ressources\img" />
@@ -131,7 +128,23 @@
       <option name="project" value="LOCAL" />
       <updated>1731143384772</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fix #06: Icones">
+      <option name="closed" value="true" />
+      <created>1731144412982</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731144412982</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Fix #06: Icones">
+      <option name="closed" value="true" />
+      <created>1731144451463</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1731144451463</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -142,6 +155,7 @@
     <MESSAGE value="Fix #03: home.html V1.0" />
     <MESSAGE value="Fix #04: home.html V1.0.1" />
     <MESSAGE value="Fix #05: robots.txt et sitemap.xml V1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix #05: robots.txt et sitemap.xml V1.0" />
+    <MESSAGE value="Fix #06: Icones" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix #06: Icones" />
   </component>
 </project>
