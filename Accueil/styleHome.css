@@ -134,16 +134,19 @@ body {
     .isere {
         height: 250px;
         margin-top: 40px;
+        margin-right: 20px;
     }
 
     .ipad {
         position: relative;
+        margin-left: 20px;
         margin-top: 50px;
         height: 180px;
         width: 268px;
     }
 
     .evolution {
+        margin-right: 20px;
         position: relative;
         margin-top: 50px;
         height: 230px;
@@ -162,15 +165,24 @@ body {
     }
 
     /* Pied de page */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #3498db;
-      color: white;
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-    }
+    .content {
+          flex: 1; /* Prend tout l'espace disponible pour pousser le footer en bas */
+          padding: 20px;
+        }
+        .wrapper {
+              display: flex;
+              flex-direction: column;
+              min-height: 100vh;
+            }
+
+        /* Pied de page */
+        footer {
+          background-color: #3498db;
+          color: white;
+          text-align: center;
+          padding: 20px;
+          align-top: 200px;
+        }
 
     footer p {
       font-size: 1em;
