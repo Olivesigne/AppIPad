@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1c3a5a8-72c5-4b8b-babc-9c71235c5889" name="Changes" comment="vcs.xml">
+    <list default="true" id="d1c3a5a8-72c5-4b8b-babc-9c71235c5889" name="Changes" comment="Fix #01: dark mode calculatrice.html">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accueil/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Accueil/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accueil/styleHome.css" beforeDir="false" afterPath="$PROJECT_DIR$/Accueil/styleHome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,12 +52,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Leonel/Documents/CalculatriceIPad",
+    "last_opened_file_path": "C:/Users/Leonel/Documents/CalculatriceIPad/ressources/img",
     "settings.editor.selected.configurable": "discord-application"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Leonel\Documents\CalculatriceIPad\ressources\img" />
       <recent name="C:\Documents\CalculatriceIPad\Accueil" />
       <recent name="C:\Documents\CalculatriceIPad" />
       <recent name="C:\Documents\CalculatriceIPad\calculatrice" />
@@ -130,11 +134,29 @@
       <option name="project" value="LOCAL" />
       <updated>1731103047446</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Loader V1.0">
+      <option name="closed" value="true" />
+      <created>1731106333526</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731106333526</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fix #01: dark mode calculatrice.html">
+      <option name="closed" value="true" />
+      <created>1731106649043</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731106649043</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="vcs.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="vcs.xml" />
+    <MESSAGE value="Loader V1.0" />
+    <MESSAGE value="Fix #01: dark mode calculatrice.html" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix #01: dark mode calculatrice.html" />
   </component>
 </project>
