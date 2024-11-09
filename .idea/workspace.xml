@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1c3a5a8-72c5-4b8b-babc-9c71235c5889" name="Changes" comment="Fix #03: home.html V1.0">
-      <change beforePath="$PROJECT_DIR$/Accueil/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Accueil/home.html" afterDir="false" />
+    <list default="true" id="d1c3a5a8-72c5-4b8b-babc-9c71235c5889" name="Changes" comment="Fix #04: home.html V1.0.1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +114,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731141377035</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix #04: home.html V1.0.1">
+      <option name="closed" value="true" />
+      <created>1731141666186</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731141666186</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -123,6 +131,7 @@
     <MESSAGE value="Fix #01: dark mode calculatrice.html" />
     <MESSAGE value="Fix #02: home.html" />
     <MESSAGE value="Fix #03: home.html V1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix #03: home.html V1.0" />
+    <MESSAGE value="Fix #04: home.html V1.0.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix #04: home.html V1.0.1" />
   </component>
 </project>

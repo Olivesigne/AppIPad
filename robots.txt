@@ -1,0 +1,14 @@
+User-agent: *
+Disallow:
+
+Disallow: /admin/
+Disallow: /login/
+Disallow: /private/
+Disallow: /config/
+
+Disallow: /test/
+Disallow: /dev/
+
+Disallow: /secret-file.html
+
+Sitemap: https://olivesigne.github.io/AppIPad/sitemap.xml

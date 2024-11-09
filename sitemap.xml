@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Page d'accueil -->
+    <url>
+        <loc>https://olivesigne.github.io/AppIPad/accueil/home.html</loc>
+        <lastmod>2024-11-07</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Page Calculatrice -->
+    <url>
+        <loc>https://olivesigne.github.io/AppIPad/calculatrice/calculatrice.html</loc>
+        <lastmod>2024-11-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Page Gestionnaire de MDP -->
+    <url>
+        <loc>https://olivesigne.github.io/AppIPad/gestionnaireMDP/gestionnaire.html</loc>
+        <lastmod>2024-10-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Page Generateur de MDP -->
+    <url>
+        <loc>https://olivesigne.github.io/AppIPad/generateurMDP/generateur.html</loc>
+        <lastmod>2024-10-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+</urlset>
