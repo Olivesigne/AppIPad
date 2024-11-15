@@ -31,8 +31,7 @@ header {
 
 #game-canvas {
   background-color: #444;
-  width: 100%;
-  max-width: 800px;
+  width: 800px; /* Remplacez % par px pour garantir la compatibilité */
   height: 300px;
   border: 2px solid #666;
   border-radius: 10px;
