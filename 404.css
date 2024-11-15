@@ -85,6 +85,60 @@ header {
 
 #game-canvas {
   background-color: #444;
+  width: 100%;
+  max-width: 800px;
+  height: 300px;
+  border: 2px solid #666;
+  border-radius: 10px;
+}
+
+#jump-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#jump-button:active {
+  background-color: #218838;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#game-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#game-canvas {
+  background-color: #444;
   width: 80vw;
   height: 40vh;
   border: 2px solid #666;
