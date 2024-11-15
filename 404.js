@@ -2,10 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("game-canvas");
   const ctx = canvas.getContext("2d");
 
-  // Définir les dimensions du canvas en fonction de sa taille CSS
-  canvas.width = canvas.clientWidth;
-  canvas.height = canvas.clientHeight;
+// Fixer explicitement les dimensions
+  canvas.width = 800;
+  canvas.height = 300;
 
+
+if (ctx) {
+  // Si le contexte est trouvé, on peut démarrer le jeu
+  gameLoop();
+} else {
+  alert("Le canvas n'est pas supporté sur cet appareil.");
+}
+
+  
   let dino = { x: 50, y: canvas.height - 60, width: 40, height: 40, dy: 0, jumping: false };
   let obstacles = [];
   let frame = 0;
