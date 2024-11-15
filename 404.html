@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page non trouvée</title>
-    <link rel="stylesheet" href="404.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erreur 404 - Dino Jeu</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="message-container">
-        <h1>Erreur 404</h1>
-        <p>Oups ! La page que vous cherchez n'existe pas.</p>
-        <p>En attendant, jouez au Dino !</p>
-    </div>
-    <div id="game-container">
-        <canvas id="gameCanvas"></canvas>
-        <div id="scoreboard">
-            Score: <span id="score">0</span>
-        </div>
-    </div>
 
-    <script src="404.js"></script>
+  <header>
+    <h1>Erreur 404</h1>
+    <p>Page non trouvée, mais vous pouvez jouer au jeu du Dino pendant ce temps !</p>
+  </header>
+
+  <main>
+    <div id="game-container">
+      <canvas id="game-canvas"></canvas>
+      <button id="jump-button">Sauter</button>
+    </div>
+  </main>
+
+  <script src="dino.js"></script>
 </body>
 </html>
