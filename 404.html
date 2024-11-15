@@ -48,13 +48,12 @@
     <canvas id="game-canvas" width="600" height="200"></canvas>
   </div>
   <button id="jump-button">Sauter</button>
-
   <script>
     const canvas = document.getElementById("game-canvas");
     const ctx = canvas.getContext("2d");
 
     // Paramètres de saut
-    let jumpVelocity = -15; // Vitesse de saut initiale pour un saut plus long
+    let jumpVelocity = -10; // Vitesse de saut initiale pour un saut plus long
     let gravity = 0.4; // Gravité réduite pour ralentir la descente
 
     let isJumping = false;
@@ -65,6 +64,12 @@
     let score = 0;
     let gameInterval;
     let scoreInterval;
+
+    // Obstacles
+    let obstacles = [];
+    const obstacleWidth = 20;
+    const obstacleHeight = 30;
+    const obstacleSpeed = 3;
 
     // Fonction de saut
     function jump() {
@@ -80,7 +85,13 @@
       document.getElementById("score").textContent = "Score: " + score;
     }
 
-    // Boucle de jeu pour mettre à jour la position du joueur
+    // Fonction pour générer un nouvel obstacle
+    function spawnObstacle() {
+      const obstacleX = canvas.width;
+      obstacles.push({ x: obstacleX, y: canvas.height - obstacleHeight - 20 });
+    }
+
+    // Boucle de jeu pour mettre à jour la position du joueur et des obstacles
     function gameLoop() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -101,6 +112,32 @@
       ctx.fillStyle = "#76a5af";
       ctx.fillRect(50, playerY, 30, 30);
 
+      // Met à jour et dessine les obstacles
+      for (let i = obstacles.length - 1; i >= 0; i--) {
+        obstacles[i].x -= obstacleSpeed;
+
+        // Supprime les obstacles sortis de l'écran
+        if (obstacles[i].x + obstacleWidth < 0) {
+          obstacles.splice(i, 1);
+        } else {
+          // Dessine l'obstacle
+          ctx.fillStyle = "#f44336";
+          ctx.fillRect(obstacles[i].x, obstacles[i].y, obstacleWidth, obstacleHeight);
+
+          // Vérifie la collision
+          if (
+            50 < obstacles[i].x + obstacleWidth &&
+            50 + 30 > obstacles[i].x &&
+            playerY < obstacles[i].y + obstacleHeight &&
+            playerY + 30 > obstacles[i].y
+          ) {
+            // Collision détectée, fin de jeu
+            alert("Game Over! Score: " + score);
+            document.location.reload();
+          }
+        }
+      }
+
       requestAnimationFrame(gameLoop);
     }
 
@@ -115,7 +152,7 @@
     // Démarrer la boucle de jeu et le score
     gameInterval = requestAnimationFrame(gameLoop);
     scoreInterval = setInterval(updateScore, 100); // Augmente le score toutes les 100 ms
-
+    setInterval(spawnObstacle, 1500); // Génère un nouvel obstacle toutes les 1,5 secondes
   </script>
 </body>
 </html>
