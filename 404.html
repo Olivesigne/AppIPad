@@ -3,319 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jeu du Dinosaure</title>
+  <title>Jeu du Dino</title>
   <style>
     body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background-color: #2c2c2c;
-      color: #fff;
-    }
-    #game-container {
-      margin-top: 20px;
-      position: relative;
-      background-color: #444;
-      border-radius: 8px;
-    }
-    #game-canvas {
-      background-color: #333;
-      border: 2px solid #fff;
-      border-radius: 8px;
-    }
-    #score {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-    #jump-button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 5px;
-      background-color: #4CAF50;
-      color: white;
-      cursor: pointer;
-    }
-    iframe {
-        width: 500px; /* Largeur de l'iframe */
-        height: 300px; /* Hauteur de l'iframe */
-        border: 1px solid #ccc; /* Bordure pour le style */
-    }
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f7f7f7;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 20px 0 10px;
+  font-size: 32px;
+}
+
+p {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}
+
+#game-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+canvas {
+  background-color: #fff;
+  border: 2px solid #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
   </style>
 </head>
 <body>
-  <h1>Jeu du Dinosaure</h1>
-  <iframe src="https://dino-chrome.com/fr" title="Jeu du dinosaure"></iframe>
-  <p>Utilisez la touche "Espace" ou le bouton "Sauter" pour éviter les obstacles !</p>
-  <div id="score">Score: 0</div>
+  <h1>Jeu du Dino</h1>
+  <p>Appuyez sur "Espace" ou cliquez pour sauter !</p>
   <div id="game-container">
-    <canvas id="game-canvas" width="600" height="200" src="https://dino-chrome.com/fr"></canvas>
+    <canvas id="game-canvas" width="800" height="200"></canvas>
   </div>
-  <button id="jump-button">Sauter</button>
   <script>
     const canvas = document.getElementById("game-canvas");
-    const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("2d");
 
-    // Paramètres de saut
-    let jumpVelocity = -10; // Vitesse de saut initiale pour un saut plus long
-    let gravity = 0.4; // Gravité réduite pour ralentir la descente
+// Images et variables
+const dinoImg = new Image();
+dinoImg.src = "dino.png"; // Remplacez par le chemin correct de l'image du dinosaure.
 
-    let isJumping = false;
-    let playerY = canvas.height - 50; // Position Y du joueur au sol
-    let velocityY = 0; // Vitesse verticale actuelle
+const cactusImg = new Image();
+cactusImg.src = "cactus.png"; // Remplacez par le chemin correct de l'image du cactus.
 
-    // Système de score
-    let score = 0;
-    let gameInterval;
-    let scoreInterval;
+let dino = { x: 50, y: 150, width: 40, height: 40, isJumping: false, velocityY: 0 };
+let gravity = 0.6;
+let jumpStrength = -12;
+let score = 0;
 
-    // Obstacles
-    let obstacles = [];
-    const obstacleWidth = 20;
-    const obstacleHeight = 30;
-    const obstacleSpeed = 3;
+let obstacles = [];
+let gameSpeed = 3;
+let spawnTimer = 0;
 
-    // Fonction de saut
-    function jump() {
-      if (!isJumping) {
-        isJumping = true;
-        velocityY = jumpVelocity;
-      }
+// Fonction pour faire sauter le dinosaure
+function jump() {
+  if (!dino.isJumping) {
+    dino.isJumping = true;
+    dino.velocityY = jumpStrength;
+  }
+}
+
+// Fonction pour créer un nouvel obstacle
+function spawnObstacle() {
+  const obstacle = {
+    x: canvas.width,
+    y: 150,
+    width: 30,
+    height: 50,
+  };
+  obstacles.push(obstacle);
+}
+
+// Fonction pour dessiner le dinosaure
+function drawDino() {
+  ctx.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
+}
+
+// Fonction pour dessiner les obstacles
+function drawObstacles() {
+  obstacles.forEach((obstacle) => {
+    ctx.drawImage(cactusImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+  });
+}
+
+// Fonction principale de mise à jour
+function update() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Mise à jour du dinosaure
+  dino.y += dino.velocityY;
+  if (dino.y >= 150) {
+    dino.y = 150;
+    dino.isJumping = false;
+  }
+  dino.velocityY += gravity;
+
+  drawDino();
+
+  // Mise à jour des obstacles
+  obstacles.forEach((obstacle, index) => {
+    obstacle.x -= gameSpeed;
+
+    // Vérification de collision
+    if (
+      dino.x < obstacle.x + obstacle.width &&
+      dino.x + dino.width > obstacle.x &&
+      dino.y < obstacle.y + obstacle.height &&
+      dino.y + dino.height > obstacle.y
+    ) {
+      alert(`Game Over! Votre score est ${score}`);
+      document.location.reload();
     }
 
-    // Fonction pour mettre à jour et afficher le score
-    function updateScore() {
+    // Suppression des obstacles hors écran
+    if (obstacle.x + obstacle.width < 0) {
+      obstacles.splice(index, 1);
       score++;
-      document.getElementById("score").textContent = "Score: " + score;
     }
+  });
 
-    // Fonction pour générer un nouvel obstacle
-    function spawnObstacle() {
-      const obstacleX = canvas.width;
-      obstacles.push({ x: obstacleX, y: canvas.height - obstacleHeight - 20 });
-    }
+  drawObstacles();
 
-    // Boucle de jeu pour mettre à jour la position du joueur et des obstacles
-    function gameLoop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Mise à jour du score
+  ctx.fillStyle = "#333";
+  ctx.font = "20px Arial";
+  ctx.fillText(`Score: ${score}`, 10, 20);
 
-      // Applique la gravité si le joueur est en l'air
-      if (isJumping) {
-        velocityY += gravity;
-        playerY += velocityY;
+  // Gestion de la génération d'obstacles
+  spawnTimer++;
+  if (spawnTimer > 100) {
+    spawnObstacle();
+    spawnTimer = 0;
+  }
 
-        // Empêche le joueur de passer sous le sol
-        if (playerY >= canvas.height - 50) {
-          playerY = canvas.height - 50;
-          isJumping = false;
-          velocityY = 0;
-        }
-      }
+  // Augmente la vitesse du jeu
+  if (score % 10 === 0 && score > 0) {
+    gameSpeed += 0.01;
+  }
 
-      // Dessine le joueur
-      ctx.fillStyle = "#76a5af";
-      ctx.fillRect(50, playerY, 30, 30);
+  requestAnimationFrame(update);
+}
 
-      // Met à jour et dessine les obstacles
-      for (let i = obstacles.length - 1; i >= 0; i--) {
-        obstacles[i].x -= obstacleSpeed;
+// Déclenchement des sauts avec la touche Espace ou un clic
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") jump();
+});
 
-        // Supprime les obstacles sortis de l'écran
-        if (obstacles[i].x + obstacleWidth < 0) {
-          obstacles.splice(i, 1);
-        } else {
-          // Dessine l'obstacle
-          ctx.fillStyle = "#f44336";
-          ctx.fillRect(obstacles[i].x, obstacles[i].y, obstacleWidth, obstacleHeight);
+document.addEventListener("click", jump);
 
-          // Vérifie la collision
-          if (
-            50 < obstacles[i].x + obstacleWidth &&
-            50 + 30 > obstacles[i].x &&
-            playerY < obstacles[i].y + obstacleHeight &&
-            playerY + 30 > obstacles[i].y
-          ) {
-            // Collision détectée, fin de jeu
-            alert("Game Over! Score: " + score);
-            document.location.reload();
-          }
-        }
-      }
-
-      requestAnimationFrame(gameLoop);
-    }
-
-    // Écouteur pour déclencher le saut avec un clic ou la touche Espace
-    document.addEventListener("keydown", (e) => {
-      if (e.code === "Space") {
-        jump();
-      }
-    });
-    document.getElementById("jump-button").addEventListener("click", jump);
-
-    // Démarrer la boucle de jeu et le score
-    gameInterval = requestAnimationFrame(gameLoop);
-    scoreInterval = setInterval(updateScore, 100); // Augmente le score toutes les 100 ms
-    setInterval(spawnObstacle, 1500); // Génère un nouvel obstacle toutes les 1,5 secondes
-  </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jeu du Dinosaure</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background-color: #2c2c2c;
-      color: #fff;
-    }
-    #game-container {
-      margin-top: 20px;
-      position: relative;
-      background-color: #444;
-      border-radius: 8px;
-    }
-    #game-canvas {
-      background-color: #333;
-      border: 2px solid #fff;
-      border-radius: 8px;
-    }
-    #score {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-    #jump-button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 5px;
-      background-color: #4CAF50;
-      color: white;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <h1>Jeu du Dinosaure</h1>
-  <p>Utilisez la touche "Espace" ou le bouton "Sauter" pour éviter les obstacles !</p>
-  <div id="score">Score: 0</div>
-  <div id="game-container">
-    <canvas id="game-canvas" width="600" height="200"></canvas>
-  </div>
-  <button id="jump-button">Sauter</button>
-  <script>
-    const canvas = document.getElementById("game-canvas");
-    const ctx = canvas.getContext("2d");
-
-    // Paramètres de saut
-    let jumpVelocity = -10; // Vitesse de saut initiale pour un saut plus long
-    let gravity = 0.4; // Gravité réduite pour ralentir la descente
-
-    let isJumping = false;
-    let playerY = canvas.height - 50; // Position Y du joueur au sol
-    let velocityY = 0; // Vitesse verticale actuelle
-
-    // Système de score
-    let score = 0;
-    let gameInterval;
-    let scoreInterval;
-
-    // Obstacles
-    let obstacles = [];
-    const obstacleWidth = 20;
-    const obstacleHeight = 30;
-    const obstacleSpeed = 3;
-
-    // Fonction de saut
-    function jump() {
-      if (!isJumping) {
-        isJumping = true;
-        velocityY = jumpVelocity;
-      }
-    }
-
-    // Fonction pour mettre à jour et afficher le score
-    function updateScore() {
-      score++;
-      document.getElementById("score").textContent = "Score: " + score;
-    }
-
-    // Fonction pour générer un nouvel obstacle
-    function spawnObstacle() {
-      const obstacleX = canvas.width;
-      obstacles.push({ x: obstacleX, y: canvas.height - obstacleHeight - 20 });
-    }
-
-    // Boucle de jeu pour mettre à jour la position du joueur et des obstacles
-    function gameLoop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Applique la gravité si le joueur est en l'air
-      if (isJumping) {
-        velocityY += gravity;
-        playerY += velocityY;
-
-        // Empêche le joueur de passer sous le sol
-        if (playerY >= canvas.height - 50) {
-          playerY = canvas.height - 50;
-          isJumping = false;
-          velocityY = 0;
-        }
-      }
-
-      // Dessine le joueur
-      ctx.fillStyle = "#76a5af";
-      ctx.fillRect(50, playerY, 30, 30);
-
-      // Met à jour et dessine les obstacles
-      for (let i = obstacles.length - 1; i >= 0; i--) {
-        obstacles[i].x -= obstacleSpeed;
-
-        // Supprime les obstacles sortis de l'écran
-        if (obstacles[i].x + obstacleWidth < 0) {
-          obstacles.splice(i, 1);
-        } else {
-          // Dessine l'obstacle
-          ctx.fillStyle = "#f44336";
-          ctx.fillRect(obstacles[i].x, obstacles[i].y, obstacleWidth, obstacleHeight);
-
-          // Vérifie la collision
-          if (
-            50 < obstacles[i].x + obstacleWidth &&
-            50 + 30 > obstacles[i].x &&
-            playerY < obstacles[i].y + obstacleHeight &&
-            playerY + 30 > obstacles[i].y
-          ) {
-            // Collision détectée, fin de jeu
-            alert("Game Over! Score: " + score);
-            document.location.reload();
-          }
-        }
-      }
-
-      requestAnimationFrame(gameLoop);
-    }
-
-    // Écouteur pour déclencher le saut avec un clic ou la touche Espace
-    document.addEventListener("keydown", (e) => {
-      if (e.code === "Space") {
-        jump();
-      }
-    });
-    document.getElementById("jump-button").addEventListener("click", jump);
-
-    // Démarrer la boucle de jeu et le score
-    gameInterval = requestAnimationFrame(gameLoop);
-    scoreInterval = setInterval(updateScore, 100); // Augmente le score toutes les 100 ms
-    setInterval(spawnObstacle, 1500); // Génère un nouvel obstacle toutes les 1,5 secondes
+// Lancement du jeu
+update();
   </script>
 </body>
 </html>
