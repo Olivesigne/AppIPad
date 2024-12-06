@@ -6,37 +6,26 @@
   <title>Jeu du Dino</title>
   <style>
     body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #f7f7f7;
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  margin: 20px 0 10px;
-  font-size: 32px;
-}
-
-p {
-  margin: 0;
-  font-size: 16px;
-  color: #666;
-}
-
-#game-container {
-  display: flex;
-  justify-content: center;
-  margin: 20px auto;
-}
-
-canvas {
-  background-color: #fff;
-  border: 2px solid #333;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-}
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    #game-container {
+      margin: 20px auto;
+      position: relative;
+      width: 800px;
+      height: 200px;
+      border: 2px solid #333;
+      background-color: #dcdcdc;
+    }
+    canvas {
+      display: block;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
@@ -47,122 +36,132 @@ canvas {
   </div>
   <script>
     const canvas = document.getElementById("game-canvas");
-const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
 
-// Images et variables
-const dinoImg = new Image();
-dinoImg.src = "dino.png"; // Remplacez par le chemin correct de l'image du dinosaure.
+    // Variables principales
+    let dino = { x: 50, y: 150, width: 30, height: 30, color: "#76a5af", velocityY: 0, jumping: false };
+    let obstacles = [];
+    let score = 0;
+    let gameSpeed = 3;
+    const gravity = 0.6;
+    const obstacleFrequency = { min: 1000, max: 3000 };
+    let lastObstacleTime = 0;
 
-const cactusImg = new Image();
-cactusImg.src = "cactus.png"; // Remplacez par le chemin correct de l'image du cactus.
-
-let dino = { x: 50, y: 150, width: 40, height: 40, isJumping: false, velocityY: 0 };
-let gravity = 0.6;
-let jumpStrength = -12;
-let score = 0;
-
-let obstacles = [];
-let gameSpeed = 3;
-let spawnTimer = 0;
-
-// Fonction pour faire sauter le dinosaure
-function jump() {
-  if (!dino.isJumping) {
-    dino.isJumping = true;
-    dino.velocityY = jumpStrength;
-  }
-}
-
-// Fonction pour créer un nouvel obstacle
-function spawnObstacle() {
-  const obstacle = {
-    x: canvas.width,
-    y: 150,
-    width: 30,
-    height: 50,
-  };
-  obstacles.push(obstacle);
-}
-
-// Fonction pour dessiner le dinosaure
-function drawDino() {
-  ctx.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
-}
-
-// Fonction pour dessiner les obstacles
-function drawObstacles() {
-  obstacles.forEach((obstacle) => {
-    ctx.drawImage(cactusImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-  });
-}
-
-// Fonction principale de mise à jour
-function update() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Mise à jour du dinosaure
-  dino.y += dino.velocityY;
-  if (dino.y >= 150) {
-    dino.y = 150;
-    dino.isJumping = false;
-  }
-  dino.velocityY += gravity;
-
-  drawDino();
-
-  // Mise à jour des obstacles
-  obstacles.forEach((obstacle, index) => {
-    obstacle.x -= gameSpeed;
-
-    // Vérification de collision
-    if (
-      dino.x < obstacle.x + obstacle.width &&
-      dino.x + dino.width > obstacle.x &&
-      dino.y < obstacle.y + obstacle.height &&
-      dino.y + dino.height > obstacle.y
-    ) {
-      alert(`Game Over! Votre score est ${score}`);
-      document.location.reload();
+    // Fonction pour dessiner un rectangle (utilisé pour le dino et les obstacles)
+    function drawRect(x, y, width, height, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, width, height);
     }
 
-    // Suppression des obstacles hors écran
-    if (obstacle.x + obstacle.width < 0) {
-      obstacles.splice(index, 1);
+    // Fonction pour générer des obstacles
+    function generateObstacle() {
+      const obstacleHeight = Math.random() * 30 + 20;
+      const obstacleWidth = Math.random() * 20 + 20;
+      obstacles.push({
+        x: canvas.width,
+        y: canvas.height - obstacleHeight,
+        width: obstacleWidth,
+        height: obstacleHeight,
+        color: "#FF5733",
+      });
+    }
+
+    // Fonction pour gérer le saut du dino
+    function jump() {
+      if (!dino.jumping) {
+        dino.jumping = true;
+        dino.velocityY = -12;
+      }
+    }
+
+    // Fonction principale de mise à jour
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Mise à jour du score
       score++;
+      ctx.fillStyle = "#000";
+      ctx.font = "20px Arial";
+      ctx.fillText("Score: " + score, 10, 20);
+
+      // Gravité et mouvement du dino
+      dino.velocityY += gravity;
+      dino.y += dino.velocityY;
+
+      if (dino.y > canvas.height - dino.height) {
+        dino.y = canvas.height - dino.height;
+        dino.jumping = false;
+      }
+
+      // Dessiner le dino
+      drawRect(dino.x, dino.y, dino.width, dino.height, dino.color);
+
+      // Gestion des obstacles
+      obstacles.forEach((obstacle, index) => {
+        obstacle.x -= gameSpeed;
+
+        // Dessiner l'obstacle
+        drawRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height, obstacle.color);
+
+        // Vérifier les collisions
+        if (
+          dino.x < obstacle.x + obstacle.width &&
+          dino.x + dino.width > obstacle.x &&
+          dino.y < obstacle.y + obstacle.height &&
+          dino.y + dino.height > obstacle.y
+        ) {
+          // Fin du jeu
+          alert("Game Over! Votre score est " + score);
+          resetGame();
+        }
+
+        // Supprimer les obstacles hors écran
+        if (obstacle.x + obstacle.width < 0) {
+          obstacles.splice(index, 1);
+        }
+      });
+
+      // Générer de nouveaux obstacles
+      const currentTime = Date.now();
+      if (currentTime - lastObstacleTime > getRandomInt(obstacleFrequency.min, obstacleFrequency.max)) {
+        generateObstacle();
+        lastObstacleTime = currentTime;
+      }
+
+      // Augmentation progressive de la vitesse du jeu
+      if (score % 500 === 0) {
+        gameSpeed += 0.2;
+      }
+
+      requestAnimationFrame(update);
     }
-  });
 
-  drawObstacles();
+    // Fonction pour obtenir un nombre aléatoire dans une plage donnée
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
-  // Mise à jour du score
-  ctx.fillStyle = "#333";
-  ctx.font = "20px Arial";
-  ctx.fillText(`Score: ${score}`, 10, 20);
+    // Fonction de réinitialisation du jeu
+    function resetGame() {
+      dino.y = canvas.height - dino.height;
+      dino.velocityY = 0;
+      dino.jumping = false;
+      obstacles = [];
+      score = 0;
+      gameSpeed = 3;
+      lastObstacleTime = 0;
+    }
 
-  // Gestion de la génération d'obstacles
-  spawnTimer++;
-  if (spawnTimer > 100) {
-    spawnObstacle();
-    spawnTimer = 0;
-  }
+    // Écouteurs d'événements pour le saut
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "Space") {
+        jump();
+      }
+    });
+    canvas.addEventListener("click", jump);
 
-  // Augmente la vitesse du jeu
-  if (score % 10 === 0 && score > 0) {
-    gameSpeed += 0.01;
-  }
-
-  requestAnimationFrame(update);
-}
-
-// Déclenchement des sauts avec la touche Espace ou un clic
-document.addEventListener("keydown", (e) => {
-  if (e.code === "Space") jump();
-});
-
-document.addEventListener("click", jump);
-
-// Lancement du jeu
-update();
+    // Démarrer le jeu
+    update();
   </script>
 </body>
 </html>
